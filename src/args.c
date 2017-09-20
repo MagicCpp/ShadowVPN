@@ -26,9 +26,7 @@
 #include "shadowvpn.h"
 
 #ifndef TARGET_WIN32
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include <windows.h>
 #endif
 
 
@@ -43,7 +41,7 @@ static const char *help_message =
 "\n"
 "Online help: <https://github.com/clowwindy/ShadowVPN>\n";
 
-static void print_help() __attribute__ ((noreturn));
+static void print_help();
 
 static void load_default_args(shadowvpn_args_t *args);
 
@@ -136,7 +134,7 @@ static int parse_user_tokens(shadowvpn_args_t *args, char *value) {
   }
   args->user_tokens_len = len;
   args->user_tokens = calloc(len, 8);
-  bzero(args->user_tokens, 8 * len);
+  ZeroMemory(args->user_tokens, 8 * len);
   value = start;
   while (*value) {
     int has_next = 0;
@@ -179,7 +177,7 @@ static int process_key_value(shadowvpn_args_t *args, const char *key,
     }
   }
   if (strcmp("server", key) == 0) {
-    args->server = strdup(value);
+    args->server = _strdup(value);
   } else if (strcmp("port", key) == 0) {
     args->port = atol(value);
   } else if (strcmp("concurrency", key) == 0) {
@@ -195,9 +193,9 @@ static int process_key_value(shadowvpn_args_t *args, const char *key,
       return -1;
     }
   } else if (strcmp("password", key) == 0) {
-    args->password = strdup(value);
+    args->password = _strdup(value);
   } else if (strcmp("user_token", key) == 0) {
-    parse_user_tokens(args, strdup(value));
+    parse_user_tokens(args, _strdup(value));
   }
 #ifndef TARGET_WIN32
   else if (strcmp("net", key) == 0) {
@@ -233,19 +231,19 @@ static int process_key_value(shadowvpn_args_t *args, const char *key,
     }
     args->mtu = mtu;
   } else if (strcmp("intf", key) == 0) {
-    args->intf = strdup(value);
+    args->intf = _strdup(value);
   } else if (strcmp("pidfile", key) == 0) {
-    args->pid_file = strdup(value);
+    args->pid_file = _strdup(value);
   } else if (strcmp("logfile", key) == 0) {
-    args->log_file = strdup(value);
+    args->log_file = _strdup(value);
   } else if (strcmp("up", key) == 0) {
-    args->up_script = strdup(value);
+    args->up_script = _strdup(value);
   } else if (strcmp("down", key) == 0) {
-    args->down_script = strdup(value);
+    args->down_script = _strdup(value);
   }
 #ifdef TARGET_WIN32
   else if (strcmp("tunip", key) == 0) {
-    args->tun_ip = strdup(value);
+    args->tun_ip = _strdup(value);
   } else if (strcmp("tunmask", key) == 0) {
     args->tun_mask = (int) atol(value);
   } else if (strcmp("tunport", key) == 0) {
@@ -277,7 +275,7 @@ static void load_default_args(shadowvpn_args_t *args) {
 
 int args_parse(shadowvpn_args_t *args, int argc, char **argv) {
   int ch;
-  bzero(args, sizeof(shadowvpn_args_t));
+  ZeroMemory(args, sizeof(shadowvpn_args_t));
   while ((ch = getopt(argc, argv, "hs:c:v")) != -1) {
     switch (ch) {
       case 's':
@@ -293,7 +291,7 @@ int args_parse(shadowvpn_args_t *args, int argc, char **argv) {
          }
         break;
       case 'c':
-        args->conf_file = strdup(optarg);
+        args->conf_file = _strdup(optarg);
         break;
       case 'v':
         verbose_mode = 1;

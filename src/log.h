@@ -35,10 +35,10 @@ extern int verbose_mode;
    debugf: same as logf but only compiles with DEBUG flag
 */
 
-#define __LOG(o, not_stderr, s...) do {                           \
+#define __LOG(o, not_stderr, ...) do {                            \
   if (not_stderr || verbose_mode) {                               \
     log_timestamp(o);                                             \
-    fprintf(o, s);                                                \
+    fprintf(o, __VA_ARGS__);                                      \
     fprintf(o, "\n");                                             \
     fflush(o);                                                    \
   }                                                               \
@@ -57,16 +57,16 @@ extern int verbose_mode;
 
 #else
 
-#define logf(s...) __LOG(stdout, 0, s)
-#define errf(s...) __LOG(stderr, 1, s)
+#define logf(...) __LOG(stdout, 0, __VA_ARGS__)
+#define errf(...) __LOG(stderr, 1, __VA_ARGS__)
 #define err(s) perror_timestamp(s, __FILE__, __LINE__)
 
 #endif
 
 #ifdef DEBUG
-#define debugf(s...) logf(s)
+#define debugf(...) logf(__VA_ARGS__)
 #else
-#define debugf(s...)
+#define debugf(...)
 #endif
 
 void log_timestamp(FILE *out);

@@ -26,7 +26,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <unistd.h>
 
 #ifndef TARGET_WIN32
 #include <sys/select.h>
@@ -358,7 +357,7 @@ int vpn_ctx_init(vpn_ctx_t *ctx, shadowvpn_args_t *args) {
   }
 #endif
 
-  bzero(ctx, sizeof(vpn_ctx_t));
+  ZeroMemory(ctx, sizeof(vpn_ctx_t));
   ctx->remote_addrp = (struct sockaddr *)&ctx->remote_addr;
 
 #ifndef TARGET_WIN32
@@ -408,7 +407,7 @@ int vpn_ctx_init(vpn_ctx_t *ctx, shadowvpn_args_t *args) {
 int vpn_run(vpn_ctx_t *ctx) {
   fd_set readset;
   int max_fd = 0, i;
-  ssize_t r;
+  int r;
   size_t usertoken_len = 0;
   if (ctx->running) {
     errf("can not start, already running");
@@ -427,8 +426,8 @@ int vpn_run(vpn_ctx_t *ctx) {
                         usertoken_len);
   ctx->udp_buf = malloc(ctx->args->mtu + SHADOWVPN_ZERO_BYTES +
                         usertoken_len);
-  bzero(ctx->tun_buf, SHADOWVPN_ZERO_BYTES);
-  bzero(ctx->udp_buf, SHADOWVPN_ZERO_BYTES);
+  ZeroMemory(ctx->tun_buf, SHADOWVPN_ZERO_BYTES);
+  ZeroMemory(ctx->udp_buf, SHADOWVPN_ZERO_BYTES);
   
   if (ctx->args->mode == SHADOWVPN_MODE_SERVER && usertoken_len) {
     ctx->nat_ctx = malloc(sizeof(nat_ctx_t));

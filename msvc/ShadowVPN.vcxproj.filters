@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{6ce7f916-eeb3-43fa-a344-cbe89ecc23aa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\args.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\crypto.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\crypto_secretbox_salsa208poly1305.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\daemon.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\log.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\nat.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\shell.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vpn.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32.c">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\args.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\crypto.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\crypto_secretbox_salsa208poly1305.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\daemon.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\nat.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\portable_endian.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\shadowvpn.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\shell.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\uthash.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\vpn.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win32.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\config.h" />
+    <ClInclude Include="..\getopt.h" />
+  </ItemGroup>
+</Project>

@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <unistd.h>
 #include "portable_endian.h"
 
 #ifndef TARGET_WIN32
